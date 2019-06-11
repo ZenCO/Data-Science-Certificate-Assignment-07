@@ -41,7 +41,7 @@ data %>%
 ### Build a model to predict `medv`
 Do single linear regression utilizing `lm` 
 ```{r}
-model_1 = lm(lstat ~ medv, data = data)
+model_1 = lm(medv ~ lstat, data = data)
 model_1
 ```
 
@@ -78,7 +78,7 @@ I honestly don't know what is going on here
 ### Predict points for lstat values of c(5, 10, 15)
 ```{r}
 predict_points = tibble(lstat = c(5, 10, 15))
-predict(model_1,  , interval= 'prediction')
+predict(model_1, predict_points , interval= 'prediction')
 ```
 
 
@@ -91,7 +91,7 @@ ggPredict(model_1)+
 
 ### Create a model using both `lstat` and `age`
 ```{r}
-model_2 = lm(lstat ~ age, data = data)
+model_2 = lm(medv ~ lstat + age, data = data)
 summary(model_2)
 ```
 
@@ -104,7 +104,7 @@ That there is also a strong statistical correlation between lstat and age.  I fe
 
 ### Create a model using all variables as predictors
 ```{r}
-model_3 = lm(lstat ~., data = data)
+model_3 = lm(medv ~., data = data)
 summary(model_3)
 ```
 
@@ -130,7 +130,7 @@ age          0.073206   0.010117   7.236 1.79e-12 ***
 ### Create a model with an interaction term
 Use `lstat` and `age` to predict `medv`
 ```{r}
-model_4 = lm(medv ~ lstat + age, lstat*age, data = data)
+model_4 = lm(medv ~ lstat + age + lstat*age, data = data)
 summary(model_4)
 ```
 
